@@ -1,0 +1,193 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <main class="w-screen h-screen">
+      <div class="flex justify-center items-center w-screen h-screen">
+        <div class="w-2/4 h-3/4 bg-slate-300 p-4 rounded-md">
+          <div
+            class="flex justify-center text-3xl font-mono text-white p-4 bg-pink-500 rounded-lg"
+          >
+            Calculator
+          </div>
+          <div
+            class="flex justify-end items-end h-1/6 pr-2 mt-4 bg-slate-100 text-xl font-bold font-serif rounded-md"
+          >
+            Hello
+          </div>
+          <div>
+            <table class="mt-4">
+              <tr>
+                <td colspan="3" class="keys ackey">AC</td>
+                <td class="keys opkeys slashkey">/</td>
+              </tr>
+              <tr>
+                <td class="keys numkeys">9</td>
+                <td class="keys numkeys">8</td>
+                <td class="keys numkeys">7</td>
+                <td class="keys opkeys">*</td>
+              </tr>
+              <tr>
+                <td class="keys numkeys">6</td>
+                <td class="keys numkeys">5</td>
+                <td class="keys numkeys">4</td>
+                <td class="keys opkeys">-</td>
+              </tr>
+              <tr>
+                <td class="keys numkeys">3</td>
+                <td class="keys numkeys">2</td>
+                <td class="keys numkeys">1</td>
+                <td class="keys opkeys">+</td>
+              </tr>
+              <tr>
+                <td class="keys numkeys" colspan="2">0</td>
+                <td class="keys opkeys">.</td>
+                <td class="keys equalkey">=</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>
+
+ <div class="container">
+  <div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+      <div class="base">
+        <div class="maindisplay">
+          <div class="subdisplay">{{ subDisplayText }}</div>
+          {{ mainDisplayText }}
+        </div>
+        <div class="keypad">
+          <table style="width: 100%">
+            <tr>
+              <td class="keys ackey" colspan="3" (click)="allClear()">AC</td>
+              <td class="keys opkey" colspan="1" (click)="pressKey('/')">/</td>
+            </tr>
+            <tr>
+              <td class="keys numkey" (click)="pressKey('7')">7</td>
+              <td class="keys numkey" (click)="pressKey('8')">8</td>
+              <td class="keys numkey" (click)="pressKey('9')">9</td>
+              <td class="keys opkey" (click)="pressKey('x')">x</td>
+            </tr>
+            <tr>
+              <td class="keys numkey" (click)="pressKey('4')">4</td>
+              <td class="keys numkey" (click)="pressKey('5')">5</td>
+              <td class="keys numkey" (click)="pressKey('6')">6</td>
+              <td class="keys opkey" (click)="pressKey('-')">-</td>
+            </tr>
+            <tr>
+              <td class="keys numkey" (click)="pressKey('3')">3</td>
+              <td class="keys numkey" (click)="pressKey('2')">2</td>
+              <td class="keys numkey" (click)="pressKey('1')">1</td>
+              <td class="keys opkey" (click)="pressKey('+')">+</td>
+            </tr>
+            <tr>
+              <td colspan="2" class="keys numkey" (click)="pressKey('0')">0</td>
+              <td class="keys numkey" (click)="pressKey('.')">.</td>
+              <td class="keys equalkey" (click)="getAnswer()">=</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4"></div>
+  </div>
+</div> -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calculator</title>
+  </head>
+  <body>
+    <div id="calculator">
+      <div id="calculatorName">
+        <p id="calculatorpara">CALCULATOR</p>
+      </div>
+      <div id="display">
+        <div class="border-2 border-b-black h-8 flex justify-end pr-6">
+          {{ subText }}
+        </div>
+        <input
+          #input
+          (keyup.enter)="solve(input.value)"
+          type="text"
+          class="flex font-mono w-72 text-end border-0 pr-6 font-semibold text-2xl"
+          [(ngModel)]="mainText"
+        />
+      </div>
+
+      <div id="buttons-container">
+        <div class="button" id="button-clear" (click)="allClear()">
+          <span>AC</span>
+        </div>
+        <div class="button" id="button-backspace" (click)="backSpace()">
+          <img src="/src/assets/backspace-arrow.png" class="w-10 h-10" alt="" />
+        </div>
+        <div class="button" id="button-percent" (click)="pressKey('%')">
+          <span> % </span>
+        </div>
+        <div class="button red" (click)="pressKey('/')" id="button-divide">
+          <span> / </span>
+        </div>
+        <div class="button" id="button-seven" (click)="pressKey('7')">
+          <span>7</span>
+        </div>
+        <div class="button" id="button-eight" (click)="pressKey('8')">
+          <span>8</span>
+        </div>
+        <div class="button" id="button-nine" (click)="pressKey('9')">
+          <span>9</span>
+        </div>
+        <div class="button red" id="button-multiply" (click)="pressKey('*')">
+          <span>*</span>
+        </div>
+        <div class="button" id="button-four" (click)="pressKey('4')">
+          <span>4</span>
+        </div>
+        <div class="button" id="button-five" (click)="pressKey('5')">
+          <span>5</span>
+        </div>
+        <div class="button" id="button-six" (click)="pressKey('6')">
+          <span>6</span>
+        </div>
+        <div class="button red" id="button-minus" (click)="pressKey('-')">
+          <span>-</span>
+        </div>
+        <div class="button" id="button-one" (click)="pressKey('1')">
+          <span> 1 </span>
+        </div>
+        <div class="button" id="button-two" (click)="pressKey('2')">
+          <span> 2 </span>
+        </div>
+        <div class="button" id="button-three" (click)="pressKey('3')">
+          <span> 3 </span>
+        </div>
+        <div class="button red" id="button-plus" (click)="pressKey('+')">
+          <span> + </span>
+        </div>
+        <div class="button" id="button-zero" (click)="pressKey('0')">
+          <span> 0 </span>
+        </div>
+        <div class="button" id="button-decimal" (click)="pressKey('.')">
+          <span> . </span>
+        </div>
+        <div class="button red" id="button-equals" (click)="answer()">
+          <span> = </span>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
